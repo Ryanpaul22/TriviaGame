@@ -2,10 +2,6 @@ $("#start").on("click",function() {
     game.start();
 })
 
-$(document).on("click", "#end", function() {
-    game.done();
-})
-
 var questions = [{
     question:"What is the name of the town that Spongebob lives in?",
     answers:["Bikini Bottom", "The Chum Bucket", "Neptune's Palace", "The Krusty Krab"],
@@ -55,15 +51,15 @@ var game = {
 
     start: function () {
         timer = setInterval(game.countdown, 1000);
-        $("#half").prepend("<h2>Time Remaining: <span id='counter'>120</span> Seconds</h2>");
+        $("#half").prepend("Time Remaining: <span id='counter'>120</span> Seconds");
         $("#start").remove();
     for (var i = 0; i < questions.length; i++) {
-        $("#half").append("<h2>" + questions[i].question + "</h2>");
+        $("#half").append(questions[i].question);
         for (var j = 0; j < questions[i].answers.length; j++) {
             $("#half").append("<input type ='radio' name = 'question-"+i+"' value = '"+ questions[i].answers[j]+"'>"+ questions[i].answers[j])
         }
     }
-        $("#half").append("<br><button id = 'end'>DONE</button>")
+        
     },
     done: function() {
         $.each($("input[name='question-0']:checked"),function() {
@@ -127,9 +123,9 @@ var game = {
             clearInterval(timer);
             $("#half h2").remove();
 
-            $("#half").html("<h2>All Done!</h2>");
-            $("#half").append("<h3>Correct Answers: " + this.correct + "</h3>");
-            $("#half").append("<h3>Incorrect Answers: " + this.incorrect + "</h3>");
-            $("#half").append("<h3>Unanswered: " + (questions.length - (this.incorrect + this.correct)) + "</h3>");
+            $("#half").html("All Done!");
+            $("#half").append("Correct Answers: " + this.correct);
+            $("#half").append("Incorrect Answers: " + this.incorrect);
+            $("#half").append("Unanswered: " + (questions.length - (this.incorrect + this.correct)));
     }
 }
